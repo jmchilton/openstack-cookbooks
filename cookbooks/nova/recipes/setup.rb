@@ -50,4 +50,10 @@ end
   end
 end
 
+execute "nova-manage image convert /var/lib/nova/images" do
+  user 'nova'
+  not_if { File.exists?("/var/lib/nova/setup") }
+end
+
+
 execute "touch /var/lib/nova/setup"
