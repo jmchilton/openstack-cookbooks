@@ -1,5 +1,6 @@
 package "python-pip"
 package "python-virtualenv"
+package "bzr"
 package "git-core"
 package "apache2"
 package "libapache2-mod-wsgi"
@@ -12,10 +13,6 @@ end
 
 execute "python setup.py develop" do
     cwd node[:nova][:dashboard][:django_nova_dir]
-end
-
-execute "python setup.py develop" do
-    cwd node[:nova][:dashboard][:django_nova_syspanel_dir]
 end
 
 execute "pip install -r #{node[:nova][:dashboard][:dashboard_dir]}/tools/pip-requires" do
