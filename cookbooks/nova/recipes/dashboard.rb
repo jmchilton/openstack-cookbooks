@@ -1,10 +1,11 @@
 package "python-pip"
 package "python-virtualenv"
 package "bzr"
+package "git-core"
 package "apache2"
 package "libapache2-mod-wsgi"
 
-execute "bzr branch #{node[:nova][:dashboard][:dashboard_branch]} #{node[:nova][:dashboard][:deploy_dir]}"
+execute "git clone #{node[:nova][:dashboard][:dashboard_repo]} #{node[:nova][:dashboard][:deploy_dir]}"
 
 file "/usr/lib/python2.6/dist-packages/dashboard.pth" do
   content node[:nova][:dashboard][:dashboard_dir]
@@ -12,10 +13,6 @@ end
 
 execute "python setup.py develop" do
     cwd node[:nova][:dashboard][:django_nova_dir]
-end
-
-execute "python setup.py develop" do
-    cwd node[:nova][:dashboard][:django_nova_syspanel_dir]
 end
 
 execute "pip install -r #{node[:nova][:dashboard][:dashboard_dir]}/tools/pip-requires" do
