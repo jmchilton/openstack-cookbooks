@@ -4,6 +4,7 @@ package "bzr"
 package "git-core"
 package "apache2"
 package "libapache2-mod-wsgi"
+package "python2.6-dev" 
 
 execute "git clone #{node[:nova][:dashboard][:dashboard_repo]} #{node[:nova][:dashboard][:deploy_dir]}"
 
